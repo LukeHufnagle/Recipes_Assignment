@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <title>Recipe</title>
+</head>
+<style>
+    #form{
+        width: 300px;
+    }
+</style>
+<body>
+    <h1>Edit {{recipe.name}}</h1><a class="btn btn-danger float-end" href="/dashboard">Dashboard</a>
+    <form  id='form' action='/update/{{recipe.id}}' method="POST">
+        <div class="form-group">
+        <label for="name">Name: </label>
+        <input type="text" class="form-control" name="name" value='{{recipe.name}}'>
+        </div>
+        <div class="form-group">
+        <label for="description">Description: </label>
+        <input type="textarea" class="form-control" name="description" value='{{recipe.description}}'>
+        </div>
+        <div class="form-group">
+            <label for="instructions">Instructions: </label>
+            <input type="textarea" class="form-control" name="instructions" value="{{recipe.instructions}}">
+        </div>
+        <div class="form-group">
+            <label for="datemade">Date made: </label>
+            <input type="date" class="form-control" name="datemade" value="{{recipe.datemade}}">
+        </div>
+        <div class="form-group">
+            <label for="under30">Under 30 Minutes: </label>
+            <p>Yes</p>
+            <input id='checkbox' type="checkbox" name="under30" value='{{recipe.thirtymin}}'>
+            <p>No</p>
+            <input id='checkbox' type="checkbox" name="under30" value='{{recipe.thirtymin}}'>
+        </div>
+        <button type="submit" class="mt-2 btn btn-primary">Update recipe</button>
+    </form>
+    {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+        {% if messages %}                            <!-- check if there are any messages -->
+            {% for message in messages %}            <!-- loop through the messages -->
+                <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</body>
+</html>
